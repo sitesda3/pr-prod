@@ -12,6 +12,8 @@ const TARGET_URL = {
 const KEYWORD = process.env.KEYWORD;
 
 const getURL = async (req, res, tURL) => {
+
+  console.log(tURL)
 	
   let URL = "";
   const browser = await puppeteer.launch({
