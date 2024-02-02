@@ -14,7 +14,22 @@ const KEYWORD = process.env.KEYWORD;
 const getURL = async (req, res, tURL) => {
 	
   let URL = "";
-  const browser = await puppeteer.launch({headless: 'new'});
+  const browser = await puppeteer.launch({
+
+	args: [
+		"--disable-setuid-sandbox",
+		"--no-sandbox",
+		"--single-process",
+		"--no-zygote",
+	  ],
+	  
+	headless: 'new',
+
+	executablePath: process.env.NODE_ENV === "production"
+	? process.env.PUPPETEER_EXECUTABLE_PATH
+	: puppeteer.executablePath();
+  });
+
   const page = await browser.newPage();
   
 try {
