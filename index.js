@@ -79,7 +79,8 @@ const server = http.createServer((req, res) => {
 	  case '/' :
 			res.writeHead(200, { 'Content-Type': 'text/html' });
 			res.write('IP denied');
-			res.end();  
+			res.end();
+			break; 
 	  
 	  case '/c115273b8b483e5375924ba490691e5a' : //m
 			getURL(req, res, TARGET_URL.URL1);
