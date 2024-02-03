@@ -75,20 +75,17 @@ try {
 const server = http.createServer((req, res) => {
   
   switch (req.url) {
+
+	  case '/' :
+			res.writeHead(200, { 'Content-Type': 'text/html' });
+			res.write('IP denied');
+			res.end();  
 	  
-	  case '/c115273b8b483e5375924ba490691e5a' : //mtv
+	  case '/c115273b8b483e5375924ba490691e5a' : //m
 			getURL(req, res, TARGET_URL.URL1);
 			break;
 	  
-	  case '/muztv' : 
-			getURL(req, res, TARGET_URL.URL1);
-			break;
-			
-	  case '/ed2c352e963ac76ec419bfced145e298' : //stv
-			getURL(req, res, TARGET_URL.URL2);
-			break;
-			
-	  case '/stv' : 
+	  case '/ed2c352e963ac76ec419bfced145e298' : //s
 			getURL(req, res, TARGET_URL.URL2);
 			break;
 			
