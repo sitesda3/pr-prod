@@ -82,11 +82,11 @@ const server = http.createServer((req, res) => {
 			res.end();
 			break; 
 	  
-	  case '/c115273b8b483e5375924ba490691e5a' : //m
+	  case '/c115273b8b483e5375924ba490691e5a.m3u8' : //m
 			getURL(req, res, TARGET_URL.URL1);
 			break;
 	  
-	  case '/ed2c352e963ac76ec419bfced145e298' : //s
+	  case '/ed2c352e963ac76ec419bfced145e298.m3u8' : //s
 			getURL(req, res, TARGET_URL.URL2);
 			break;
 			
