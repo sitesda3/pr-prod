@@ -81,13 +81,13 @@ try {
  }
 };
 
-const routeReq = (req, res, route) => {
+const routeReq = (req, res, targetURL, route) => {
 	if (cache?.[route]?.url && (Date.now() - cache?.[route]?.timestamp) < 1000 * 60 * 60) {
 				console.log('From cache');
 				redirectURL(res, cache?.[route]?.url);
 			} else {
 				console.log('From source');
-				getURL(req, res, TARGET_URL.URL1, route);
+				getURL(req, res, targetURL, route);
 			}
 }
 
@@ -105,13 +105,13 @@ const server = http.createServer((req, res) => {
 	  
 	  case '/c115273b8b483e5375924ba490691e5a.m3u8' : //m
 			
-			routeReq(req, res, route);
+			routeReq(req, res, TARGET_URL.URL1, route);
 					
 			break;
 	  
 	  case '/ed2c352e963ac76ec419bfced145e298.m3u8' : //s
 			
-			routeReq(req, res, route);
+			routeReq(req, res, TARGET_URL.URL2, route);
 			
 			break;
 			
