@@ -11,8 +11,18 @@ const TARGET_URL = {
 
 const KEYWORD = process.env.KEYWORD;
 
-const getURL = async (req, res, tURL) => {
+const cache = {};
 
+const redirectURL = (res, url) => {
+	res.writeHead(301,{
+			"Location": url,
+			"Access-Control-Allow-Origin": "*"
+		});
+		res.end();
+}
+
+const getURL = async (req, res, tURL, route) => {
+	
   console.log(tURL)
 	
   let URL = "";
@@ -55,16 +65,15 @@ try {
   
   await page.goto(tURL);
   
+  cache[route] = {
+	  url: URL,
+	  timestamp: Date.now()
+  }
+  
   await page.waitForSelector('video').then(() => {
-		res.writeHead(301,{
-			"Location": URL,
-			"Access-Control-Allow-Origin": "*"
-		});
-		res.end();
+		redirectURL(res, URL);
 	});
 		
-  await browser.close();
-  
  } catch (e) {
 	console.log(e);
  } finally {
@@ -72,9 +81,21 @@ try {
  }
 };
 
+const routeReq = (req, res, route) => {
+	if (cache?.[route]?.url && (Date.now() - cache?.[route]?.timestamp) < 1000 * 60 * 60) {
+				console.log('From cache');
+				redirectURL(res, cache?.[route]?.url);
+			} else {
+				console.log('From source');
+				getURL(req, res, TARGET_URL.URL1, route);
+			}
+}
+
 const server = http.createServer((req, res) => {
-  
-  switch (req.url) {
+	
+	const route = req.url.split('/')[1].split('.')[0];
+	
+    switch (req.url) {
 
 	  case '/' :
 			res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -83,11 +104,15 @@ const server = http.createServer((req, res) => {
 			break; 
 	  
 	  case '/c115273b8b483e5375924ba490691e5a.m3u8' : //m
-			getURL(req, res, TARGET_URL.URL1);
+			
+			routeReq(req, res, route);
+					
 			break;
 	  
 	  case '/ed2c352e963ac76ec419bfced145e298.m3u8' : //s
-			getURL(req, res, TARGET_URL.URL2);
+			
+			routeReq(req, res, route);
+			
 			break;
 			
 	  default:
@@ -98,5 +123,5 @@ const server = http.createServer((req, res) => {
 
 });
 
-server.listen(PORT);
+server.listen(PORT, () => console.log('Listening on port:', PORT));
 
