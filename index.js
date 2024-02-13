@@ -93,9 +93,9 @@ const routeReq = (req, res, targetURL, route) => {
 
 const server = http.createServer((req, res) => {
 	
-	const route = req.url.split('/')[1].split('.')[0];
+	const route = req.url === '/' ? '/' : req.url.split('/')[1].split('.')[0];
 	
-    switch (req.url) {
+    switch (route) {
 
 	  case '/' :
 			res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -103,13 +103,13 @@ const server = http.createServer((req, res) => {
 			res.end();
 			break; 
 	  
-	  case '/c115273b8b483e5375924ba490691e5a.m3u8' : //m
+	  case 'c115273b8b483e5375924ba490691e5a' : //m
 			
 			routeReq(req, res, TARGET_URL.URL1, route);
 					
 			break;
 	  
-	  case '/ed2c352e963ac76ec419bfced145e298.m3u8' : //s
+	  case 'ed2c352e963ac76ec419bfced145e298' : //s
 			
 			routeReq(req, res, TARGET_URL.URL2, route);
 			
