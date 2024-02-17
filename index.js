@@ -121,7 +121,7 @@ const server = http.createServer((req, res) => {
 			const token = date.getUTCDate() + date.getUTCMinutes();
 			const hash = crypto.createHash('sha1').update(token.toString()).digest('hex');
 			
-			const origins = ['https://pl-site.onrender.com'];
+			const origins = ['https://pl-site.onrender.com', 'https://watch.onlinetv.dnsabr.com'];
 			let origin = ''
 			if (origins.includes(req.headers.origin)) {
 				origin = req.headers.origin;
