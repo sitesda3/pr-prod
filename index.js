@@ -1,7 +1,7 @@
 require('dotenv').config();
 const puppeteer = require('puppeteer');
 const http = require('http');
-
+const crypto = require('crypto')
 
 const PORT = process.env.PORT;
 const TARGET_URL = {
@@ -114,6 +114,32 @@ const server = http.createServer((req, res) => {
 			routeReq(req, res, TARGET_URL.URL2, route);
 			
 			break;
+			
+	   case 'b439a4514c277ce6fccc8f28ca817183' : //c
+			
+			const date = new Date();
+			const token = date.getUTCDate() + date.getUTCMinutes();
+			const hash = crypto.createHash('sha1').update(token.toString()).digest('hex');
+			
+			const origins = ['https://pl-site.onrender.com'];
+			let origin = ''
+			if (origins.includes(req.headers.origin)) {
+				origin = req.headers.origin;
+			}
+			console.log(req.headers.origin);
+	        res.writeHead(200, 
+			  { 'Content-Type': 'text/html', 
+				'Access-Control-Allow-Headers': 'Content-Type, X-Route', 
+				'Access-Control-Expose-Headers': 'Content-Type, X-Route', 
+			    'Access-Control-Allow-Origin': `${origin}`, 
+				'Vary': 'Origin',
+				'X-Route': hash
+			  });
+			
+			res.end()
+			
+			break;
+			
 			
 	  default:
 			res.writeHead(404, { 'Content-Type': 'text/html' });
