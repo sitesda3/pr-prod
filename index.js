@@ -34,11 +34,9 @@ const server = http.createServer(function (req, res) {
   
 try {
   
-  const customUA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36';
+ console.log('1',PAGETITLE) 
  
-  await page.setUserAgent(customUA);
-  
-  await page.setViewport({width: 1920, height: 1080});
+
   
  
   
@@ -50,11 +48,12 @@ await page.screenshot({
   fullPage: true
  })
 const PAGETITLE = await page.title();
- console.log(PAGETITLE)
+
 		
  } catch (e) {
-	console.log(e);
+	console.log('2',e);
  } finally {
+	console.log('3',e);
 	await browser.close();
  }
 
