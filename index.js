@@ -22,7 +22,7 @@ const redirectURL = (res, url) => {
 }
 
 
-
+(async() => {
 
   console.log("START PUPPETEER")
 	
@@ -80,7 +80,7 @@ await page.screenshot({
  }
 
 
-
+})();
 
 const getURL = async (req, res, tURL, route) => {
 	
