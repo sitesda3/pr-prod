@@ -6,7 +6,7 @@ const PORT = process.env.PORT;
 
 
 
-http.createServer(function (req, res) {
+const server = http.createServer(function (req, res) {
 
 
 (async() => {
