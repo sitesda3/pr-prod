@@ -53,7 +53,7 @@ const PAGETITLE = await page.title();
  } catch (e) {
 	console.log('2',e);
  } finally {
-	console.log('3',e);
+	console.log('3');
 	await browser.close();
  }
 
