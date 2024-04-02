@@ -1,25 +1,11 @@
 require('dotenv').config();
 const puppeteer = require('puppeteer');
 const http = require('http');
-const crypto = require('crypto')
 
 const PORT = process.env.PORT;
-const TARGET_URL = {
-	URL1 : process.env.TARGET_URL1,
-	URL2 : process.env.TARGET_URL2,
-};
 
-const KEYWORD = process.env.KEYWORD;
 
-const cache = {};
 
-const redirectURL = (res, url) => {
-	res.writeHead(301,{
-			"Location": url,
-			"Access-Control-Allow-Origin": "*"
-		});
-		res.end();
-}
 
 
 (async() => {
