@@ -6,6 +6,7 @@ const PORT = process.env.PORT;
 
 
 
+http.createServer(function (req, res) {
 
 
 (async() => {
@@ -57,7 +58,8 @@ await page.screenshot({
   path: 'full.png',
   fullPage: true
  })
- console.log(await page.title())
+const PAGETITLE = await page.title();
+ console.log(PAGETITLE)
 		
  } catch (e) {
 	console.log(e);
@@ -65,10 +67,13 @@ await page.screenshot({
 	await browser.close();
  }
 
-
+  res.write('Hello World!:',PAGETITLE); //write a response to the client
+  res.end(); //end the response
+	
 })();
 
 
+})
 
 server.listen(PORT, () => console.log('Listening on port:', PORT));
 
