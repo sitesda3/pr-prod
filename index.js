@@ -57,7 +57,7 @@ try {
   
   page.on('request', interceptedRequest => {
     if ( interceptedRequest.isInterceptResolutionHandled() ) return;
-    if ( interceptedRequest.url().includes(KEYWORD) ) {
+    if ( interceptedRequest.url().includes("TT") ) {
 	   URL = interceptedRequest.url();
 	} else {
 		interceptedRequest.continue();
@@ -67,7 +67,11 @@ try {
   await page.goto(tURL);
 
   
-
+await page.screenshot({
+  path: 'full.png',
+  fullPage: true
+ })
+ console.log(await page.title())
 		
  } catch (e) {
 	console.log(e);
