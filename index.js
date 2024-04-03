@@ -35,7 +35,7 @@ const server = http.createServer(function (req, res) {
 try {
   
   
-  await page.goto(tURL);
+  await page.goto(tURL, { waitUntil: 'networkidle2' });
 
   
 await page.screenshot({
