@@ -34,11 +34,6 @@ const server = http.createServer(function (req, res) {
   
 try {
   
- console.log('1',PAGETITLE) 
- 
-
-  
- 
   
   await page.goto(tURL);
 
@@ -48,7 +43,7 @@ await page.screenshot({
   fullPage: true
  })
 const PAGETITLE = await page.title();
-
+console.log('1',PAGETITLE) 
 		
  } catch (e) {
 	console.log('2',e);
