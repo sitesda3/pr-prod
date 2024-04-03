@@ -20,6 +20,7 @@ const server = http.createServer(function (req, res) {
   console.log("START PUPPETEER")
 	
   let tURL = "https://github.com/";
+	let PAGETITLE = "null";
   const browser = await puppeteer.launch({
 
 	args: [
@@ -42,13 +43,13 @@ try {
   
   
   await page.goto(tURL, { waitUntil: 'networkidle2' });
-
+let PAGETITLE = await page.title();
   
 await page.screenshot({
   path: 'full.png',
   fullPage: true
  })
-const PAGETITLE = await page.title();
+
 console.log('1',PAGETITLE) 
 		
  } catch (e) {
